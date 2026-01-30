@@ -478,17 +478,16 @@ body {
 }
 
 .nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 3rem 0 1.5rem;
 }
 
 .logo {
     margin-right: auto;
-    padding-right: 4rem;
 }
 
 /* Logo Styling */
