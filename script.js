@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add mousemove effect for lights
     document.addEventListener('mousemove', (e) => {
-        lights.forEach((light, index) => {
+        lights.forEach((light) => {
             const rect = light.getBoundingClientRect();
             const lightCenterX = rect.left + rect.width / 2;
             const lightCenterY = rect.top + rect.height / 2;
@@ -15,14 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 Math.pow(e.clientY - lightCenterY, 2)
             );
             
-            // If mouse is close to light (within 150px), make it warm white
-            if (distance < 150) {
+            // If mouse is close to light (within 200px), make it warm white
+            if (distance < 200) {
                 light.classList.add('active');
-                const intensity = 1 - (distance / 150);
-                light.style.opacity = 0.5 + (intensity * 0.5);
             } else {
                 light.classList.remove('active');
-                light.style.opacity = 0.5;
             }
         });
     });
@@ -32,9 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         lights.forEach((light, index) => {
             if (!light.matches(':hover') && !light.classList.contains('active')) {
                 setTimeout(() => {
-                    const randomOpacity = 0.3 + Math.random() * 0.4;
-                    light.style.transition = 'opacity 2s ease';
-                    light.style.opacity = randomOpacity;
+                    const lens = light.querySelector('.light-lens');
+                    if (lens) {
+                        const randomIntensity = 0.6 + Math.random() * 0.4;
+                        lens.style.opacity = randomIntensity;
+                    }
                 }, index * 200);
             }
         });

@@ -9,21 +9,49 @@
 <body>
     <!-- Theater Lights Container -->
     <div class="theater-lights">
-        <div class="light" data-index="0"></div>
-        <div class="light" data-index="1"></div>
-        <div class="light" data-index="2"></div>
-        <div class="light" data-index="3"></div>
-        <div class="light" data-index="4"></div>
-        <div class="light" data-index="5"></div>
-        <div class="light" data-index="6"></div>
-        <div class="light" data-index="7"></div>
+        <div class="light" data-index="0">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
+        <div class="light" data-index="1">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
+        <div class="light" data-index="2">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
+        <div class="light" data-index="3">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
+        <div class="light" data-index="4">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
+        <div class="light" data-index="5">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
+        <div class="light" data-index="6">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
+        <div class="light" data-index="7">
+            <div class="light-beam"></div>
+            <div class="light-lens"></div>
+        </div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <img src="logo.png" alt="Barhorst Podium Techniek Logo" class="logo-img">
+                <img src="logo.png" alt="Barhorst Podium Techniek Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-placeholder" style="display: none;">
+                    <span class="logo-icon">🎭</span>
+                    <span class="logo-text">BARHORST</span>
+                </div>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
@@ -47,7 +75,16 @@
             </div>
         </div>
         <div class="hero-image">
-            <img src="homepage.png" alt="Barhorst Podium Techniek" class="hero-img">
+            <img src="homepage.png" alt="Barhorst Podium Techniek" class="hero-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="hero-visual" style="display: none;">
+                <div class="stage-lights">
+                    <div class="stage-light"></div>
+                    <div class="stage-light"></div>
+                    <div class="stage-light"></div>
+                </div>
+                <div class="stage-platform"></div>
+                <div class="hero-badge">PROFESSIONEEL<br>LICHT & GELUID</div>
+            </div>
             <div class="image-overlay"></div>
         </div>
     </section>

@@ -30,66 +30,142 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 150px;
+    height: 180px;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     padding: 20px;
     z-index: 1000;
     pointer-events: none;
+    background: linear-gradient(to bottom, rgba(10, 14, 26, 0.95), transparent);
 }
 
 .light {
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, rgba(0, 255, 136, 0.3), transparent);
-    border-radius: 50%;
+    width: 120px;
+    height: 120px;
     position: relative;
-    transition: all 0.3s ease;
-    opacity: 0.5;
     pointer-events: all;
     cursor: pointer;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
 }
 
+/* Lamp behuizing */
 .light::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    background: var(--primary-green);
-    border-radius: 50%;
-    box-shadow: 0 0 20px var(--primary-green);
-    transition: all 0.3s ease;
-}
-
-.light::after {
     content: '';
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
-    height: 30px;
-    background: linear-gradient(to bottom, #333, transparent);
-}
-
-.light:hover {
-    transform: scale(1.2);
-    opacity: 1;
-}
-
-.light:hover::before {
-    background: var(--warm-white);
-    box-shadow: 0 0 40px var(--warm-white), 0 0 60px rgba(255, 248, 231, 0.5);
     width: 60px;
-    height: 60px;
+    height: 40px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    border-radius: 8px 8px 0 0;
+    border: 2px solid #444;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    z-index: 2;
 }
 
-.light.active {
-    animation: pulse 2s infinite;
+/* Ophang beugel */
+.light::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 20px;
+    background: linear-gradient(to right, #555, #333);
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+}
+
+/* Lens van de lamp */
+.light-lens {
+    position: absolute;
+    top: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 55px;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 255, 136, 0.8), rgba(0, 255, 136, 0.4) 50%, rgba(0, 200, 110, 0.6));
+    border-radius: 50%;
+    border: 3px solid #1a1a1a;
+    box-shadow: 
+        inset 0 -3px 10px rgba(0, 0, 0, 0.5),
+        inset 0 3px 10px rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(0, 255, 136, 0.4);
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+/* Lichtstraal */
+.light-beam {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-top: 80px solid rgba(0, 255, 136, 0.15);
+    filter: blur(10px);
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.light:hover .light-beam {
+    opacity: 1;
+    border-top-color: rgba(255, 248, 231, 0.25);
+    filter: blur(15px);
+}
+
+.light:hover .light-lens {
+    background: radial-gradient(circle at 30% 30%, #fff, #fff8e7 40%, #ffeb99);
+    box-shadow: 
+        inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+        inset 0 3px 15px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 248, 231, 0.8),
+        0 0 60px rgba(255, 248, 231, 0.5),
+        0 0 80px rgba(255, 248, 231, 0.3);
+    transform: translateX(-50%) scale(1.1);
+}
+
+.light.active .light-beam {
+    opacity: 0.7;
+    animation: beamPulse 2s infinite;
+}
+
+.light.active .light-lens {
+    animation: lensPulse 2s infinite;
+}
+
+@keyframes beamPulse {
+    0%, 100% {
+        opacity: 0.5;
+        border-top-color: rgba(255, 248, 231, 0.2);
+    }
+    50% {
+        opacity: 0.8;
+        border-top-color: rgba(255, 248, 231, 0.3);
+    }
+}
+
+@keyframes lensPulse {
+    0%, 100% {
+        box-shadow: 
+            inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+            inset 0 3px 15px rgba(255, 255, 255, 0.3),
+            0 0 30px rgba(255, 248, 231, 0.6);
+    }
+    50% {
+        box-shadow: 
+            inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+            inset 0 3px 15px rgba(255, 255, 255, 0.4),
+            0 0 50px rgba(255, 248, 231, 0.8);
+    }
 }
 
 @keyframes pulse {
@@ -122,10 +198,48 @@ body {
     padding: 0 2rem;
 }
 
+/* Logo Styling */
 .logo-img {
-    height: 60px;
+    height: 80px;
     width: auto;
-    filter: drop-shadow(0 0 10px var(--primary-green));
+    filter: drop-shadow(0 0 15px var(--primary-green));
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.logo-img:hover {
+    filter: drop-shadow(0 0 25px var(--primary-green));
+    transform: scale(1.05);
+}
+
+/* Logo Placeholder - alleen zichtbaar als afbeelding niet laadt */
+.logo-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+    transition: all 0.3s ease;
+}
+
+.logo-placeholder:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+}
+
+.logo-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--dark-bg);
+    letter-spacing: 2px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .nav-menu {
@@ -261,17 +375,133 @@ body {
     z-index: 2;
 }
 
+/* Hero Image - voor echte afbeeldingen */
 .hero-img {
     width: 100%;
     height: auto;
+    max-height: 600px;
+    object-fit: cover;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 3px solid var(--primary-green);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 3px var(--primary-green);
     transition: transform 0.3s ease;
+    display: block;
 }
 
 .hero-img:hover {
-    transform: scale(1.05) rotate(1deg);
+    transform: scale(1.02) rotate(0.5deg);
+}
+
+/* Hero Visual Placeholder - alleen als afbeelding niet laadt */
+.hero-visual {
+    width: 100%;
+    height: 500px;
+    background: linear-gradient(135deg, var(--medium-bg) 0%, var(--dark-green) 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--primary-green);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.hero-visual:hover {
+    transform: scale(1.02) rotate(0.5deg);
+}
+
+.stage-lights {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.stage-light {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #fff, #fff8e7 40%, var(--primary-green));
+    border-radius: 50%;
+    box-shadow: 
+        0 0 30px var(--primary-green),
+        0 0 50px rgba(0, 255, 136, 0.5),
+        inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+    animation: stageLightGlow 3s infinite alternate;
+    position: relative;
+}
+
+.stage-light::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid rgba(0, 255, 136, 0.2);
+    filter: blur(20px);
+}
+
+.stage-light:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.stage-light:nth-child(2) {
+    animation-delay: 1s;
+    background: radial-gradient(circle at 30% 30%, #fff, #fff8e7 40%, #00ff88);
+}
+
+.stage-light:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes stageLightGlow {
+    0% {
+        box-shadow: 
+            0 0 30px var(--primary-green),
+            0 0 50px rgba(0, 255, 136, 0.5);
+    }
+    100% {
+        box-shadow: 
+            0 0 40px var(--primary-green),
+            0 0 70px rgba(0, 255, 136, 0.7),
+            0 0 90px rgba(0, 255, 136, 0.4);
+    }
+}
+
+.stage-platform {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    border-radius: 0 0 17px 17px;
+}
+
+.hero-badge {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    background: rgba(0, 255, 136, 0.9);
+    color: var(--dark-bg);
+    font-weight: 900;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
+    z-index: 3;
+    line-height: 1.4;
 }
 
 .image-overlay {
@@ -280,7 +510,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), transparent);
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), transparent);
     border-radius: 20px;
     pointer-events: none;
 }
@@ -506,6 +736,14 @@ body {
         top: 100px;
     }
     
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    .logo-icon {
+        font-size: 1.5rem;
+    }
+    
     .nav-menu {
         gap: 1rem;
         font-size: 0.9rem;
@@ -515,6 +753,24 @@ body {
         flex-direction: column;
         padding: 200px 1rem 50px;
         text-align: center;
+    }
+    
+    .hero-visual {
+        height: 400px;
+    }
+    
+    .stage-lights {
+        gap: 1rem;
+    }
+    
+    .stage-light {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .hero-badge {
+        font-size: 0.8rem;
+        padding: 0.75rem 1.5rem;
     }
     
     .glitch {
