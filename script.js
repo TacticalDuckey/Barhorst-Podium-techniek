@@ -1,5 +1,8 @@
 // Theater Lights Interactive Effect
 document.addEventListener('DOMContentLoaded', () => {
+    // Create ambient side lights
+    createAmbientLights();
+    
     const lights = document.querySelectorAll('.light');
     
     // Voeg extra barn doors toe aan elke lamp
@@ -180,3 +183,38 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('%c🎭 Barhorst Podium Techniek', 'color: #00ff88; font-size: 20px; font-weight: bold;');
     console.log('%cProfessioneel licht & geluid voor elk podium', 'color: #fff; font-size: 12px;');
 });
+
+// Create ambient side lights with pattern
+function createAmbientLights() {
+    const container = document.createElement('div');
+    container.className = 'ambient-lights';
+    document.body.appendChild(container);
+    
+    const sections = ['home', 'diensten', 'portfolio', 'contact'];
+    const lightsPerSide = 8;
+    
+    sections.forEach((sectionId, sectionIndex) => {
+        for (let i = 0; i < lightsPerSide; i++) {
+            // Left side
+            const leftLight = document.createElement('div');
+            leftLight.className = 'ambient-light';
+            
+            // Right side
+            const rightLight = document.createElement('div');
+            rightLight.className = 'ambient-light';
+            
+            // Calculate positions with pattern
+            const baseTop = (sectionIndex * 25) + (i * 3) + (Math.random() * 2);
+            const offset = Math.sin(i * 0.8) * 2;
+            
+            leftLight.style.left = '2%';
+            leftLight.style.top = `${baseTop + offset}%`;
+            
+            rightLight.style.right = '2%';
+            rightLight.style.top = `${baseTop - offset}%`;
+            
+            container.appendChild(leftLight);
+            container.appendChild(rightLight);
+        }
+    });
+}
