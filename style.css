@@ -478,7 +478,7 @@ body {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -486,9 +486,14 @@ body {
     padding: 0 2rem;
 }
 
+.logo {
+    margin-right: auto;
+    padding-right: 3rem;
+}
+
 /* Logo Styling */
 .logo-img {
-    height: 65px;
+    height: 100px;
     width: auto;
     filter: drop-shadow(0 2px 8px rgba(0, 255, 136, 0.3)) brightness(1.05);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
