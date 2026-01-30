@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barhorst Podium Techniek - Licht & Geluid</title>
     <link rel="stylesheet" href="style.css">
+    <script src="config.js"></script>
 </head>
 <body>
     <!-- Ambient Lights -->
@@ -166,23 +167,27 @@
                     <div class="contact-details">
                         <div class="contact-item">
                             <span class="icon">📧</span>
-                            <span>info@barhorstpodium.nl</span>
+                            <span id="contact-email">info@barhorstpodium.nl</span>
                         </div>
                         <div class="contact-item">
                             <span class="icon">📱</span>
-                            <span>+31 (0)6 12 34 56 78</span>
+                            <span id="contact-phone">+31 (0)6 12 34 56 78</span>
                         </div>
                         <div class="contact-item">
                             <span class="icon">📍</span>
-                            <span>Nederland</span>
+                            <span id="contact-location">Nederland</span>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Naam" required>
-                    <input type="email" placeholder="E-mail" required>
-                    <input type="text" placeholder="Organisatie / Productie">
-                    <textarea placeholder="Vertel meer over je project" rows="5" required></textarea>
+                <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact">
+                    <p style="display: none;">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
+                    <input type="text" name="naam" placeholder="Naam" required>
+                    <input type="email" name="email" placeholder="E-mail" required>
+                    <input type="text" name="organisatie" placeholder="Organisatie / Productie">
+                    <textarea name="bericht" placeholder="Vertel meer over je project" rows="5" required></textarea>
                     <button type="submit" class="btn btn-primary">Verstuur Bericht</button>
                 </form>
             </div>

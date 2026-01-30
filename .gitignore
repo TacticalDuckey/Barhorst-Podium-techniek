@@ -1,0 +1,5 @@
+# Gevoelige configuratie
+config.js
+
+# Netlify
+.netlify/

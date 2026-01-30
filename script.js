@@ -1,5 +1,16 @@
 // Theater Lights Interactive Effect
 document.addEventListener('DOMContentLoaded', () => {
+    // Laad contactgegevens uit config.js (als beschikbaar)
+    if (typeof CONFIG !== 'undefined') {
+        const emailEl = document.getElementById('contact-email');
+        const phoneEl = document.getElementById('contact-phone');
+        const locationEl = document.getElementById('contact-location');
+        
+        if (emailEl) emailEl.textContent = CONFIG.email;
+        if (phoneEl) phoneEl.textContent = CONFIG.phone;
+        if (locationEl) locationEl.textContent = CONFIG.location;
+    }
+    
     // Create ambient side lights
     createAmbientLights();
     
