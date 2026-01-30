@@ -190,22 +190,17 @@ function createAmbientLights() {
     container.className = 'ambient-lights';
     document.body.appendChild(container);
     
-    // Handpicked positions: afwisselend links/rechts, ongeveer verspreid over pagina
+    // Exacte posities op basis van screenshot
     const positions = [
-        { side: 'left', top: 15 },
-        { side: 'right', top: 28 },
-        { side: 'left', top: 42 },
-        { side: 'right', top: 58 },
-        { side: 'left', top: 73 },
-        { side: 'right', top: 88 }
+        { side: 'left', top: 10 },   // Links boven
+        { side: 'right', top: 5 },   // Rechts boven
+        { side: 'left', top: 50 },   // Links midden
+        { side: 'right', top: 85 }   // Rechts onder
     ];
     
-    positions.forEach((pos, index) => {
+    positions.forEach((pos) => {
         const light = document.createElement('div');
         light.className = 'ambient-light';
-        
-        // Add small random offset for natuurlijk effect
-        const randomOffset = (Math.random() - 0.5) * 4;
         
         if (pos.side === 'left') {
             light.style.left = '1%';
@@ -213,7 +208,7 @@ function createAmbientLights() {
             light.style.right = '1%';
         }
         
-        light.style.top = `${pos.top + randomOffset}%`;
+        light.style.top = `${pos.top}%`;
         
         container.appendChild(light);
     });
