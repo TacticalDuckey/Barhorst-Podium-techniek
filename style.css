@@ -468,7 +468,7 @@ body {
 .navbar {
     background: rgba(10, 10, 15, 0.98);
     backdrop-filter: blur(20px) saturate(180%);
-    padding: 1.25rem 0;
+    padding: 1rem 0;
     position: fixed;
     width: 100%;
     top: 0;
@@ -483,26 +483,26 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 1.5rem 0 1rem;
 }
 
 .logo {
     margin-right: auto;
-    padding-right: 3rem;
+    padding-right: 4rem;
 }
 
 /* Logo Styling */
 .logo-img {
-    height: 100px;
+    height: 140px;
     width: auto;
-    filter: drop-shadow(0 2px 8px rgba(0, 255, 136, 0.3)) brightness(1.05);
+    filter: drop-shadow(0 3px 10px rgba(0, 255, 136, 0.4)) brightness(1.05);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
 }
 
 .logo-img:hover {
-    filter: drop-shadow(0 4px 12px rgba(0, 255, 136, 0.5)) brightness(1.1);
-    transform: translateY(-1px);
+    filter: drop-shadow(0 5px 15px rgba(0, 255, 136, 0.6)) brightness(1.1);
+    transform: translateY(-2px);
 }
 
 /* Logo Placeholder - alleen zichtbaar als afbeelding niet laadt */
