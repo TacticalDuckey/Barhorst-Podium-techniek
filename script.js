@@ -2,6 +2,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const lights = document.querySelectorAll('.light');
     
+    // Voeg extra barn doors toe aan elke lamp
+    lights.forEach(light => {
+        const rightBarnDoor = document.createElement('div');
+        rightBarnDoor.className = 'barn-door-right';
+        const bottomBarnDoor = document.createElement('div');
+        bottomBarnDoor.className = 'barn-door-bottom';
+        const focusKnob = document.createElement('div');
+        focusKnob.className = 'focus-knob';
+        
+        light.appendChild(rightBarnDoor);
+        light.appendChild(bottomBarnDoor);
+        light.appendChild(focusKnob);
+    });
+    
     // Add mousemove effect for lights
     document.addEventListener('mousemove', (e) => {
         lights.forEach((light) => {
