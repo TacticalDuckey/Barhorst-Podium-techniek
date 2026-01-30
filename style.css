@@ -921,6 +921,9 @@ body {
 .portfolio-item {
     height: 280px;
     background: linear-gradient(135deg, var(--dark-3), var(--dark-4));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
