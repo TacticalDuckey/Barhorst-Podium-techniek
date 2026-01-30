@@ -198,7 +198,8 @@ function createAmbientLights() {
     const positions = [
         { side: 'left', top: 20 },   // Links boven
         { side: 'right', top: 10 },   // Rechts boven  
-        { side: 'left', top: 70 }    // Links onder
+        { side: 'left', top: 70 },    // Links onder
+        { side: 'right', top: 90 }    // Rechts onder
     ];
     
     positions.forEach((pos) => {
