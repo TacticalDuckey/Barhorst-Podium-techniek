@@ -1,0 +1,169 @@
+// Theater Lights Interactive Effect
+document.addEventListener('DOMContentLoaded', () => {
+    const lights = document.querySelectorAll('.light');
+    
+    // Add mousemove effect for lights
+    document.addEventListener('mousemove', (e) => {
+        lights.forEach((light, index) => {
+            const rect = light.getBoundingClientRect();
+            const lightCenterX = rect.left + rect.width / 2;
+            const lightCenterY = rect.top + rect.height / 2;
+            
+            // Calculate distance from mouse to light
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - lightCenterX, 2) + 
+                Math.pow(e.clientY - lightCenterY, 2)
+            );
+            
+            // If mouse is close to light (within 150px), make it warm white
+            if (distance < 150) {
+                light.classList.add('active');
+                const intensity = 1 - (distance / 150);
+                light.style.opacity = 0.5 + (intensity * 0.5);
+            } else {
+                light.classList.remove('active');
+                light.style.opacity = 0.5;
+            }
+        });
+    });
+    
+    // Random subtle pulsing for lights when not hovered
+    setInterval(() => {
+        lights.forEach((light, index) => {
+            if (!light.matches(':hover') && !light.classList.contains('active')) {
+                setTimeout(() => {
+                    const randomOpacity = 0.3 + Math.random() * 0.4;
+                    light.style.transition = 'opacity 2s ease';
+                    light.style.opacity = randomOpacity;
+                }, index * 200);
+            }
+        });
+    }, 3000);
+    
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offset = 200; // Account for fixed navbar and lights
+                const targetPosition = target.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Form submission handler
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simple form validation and feedback
+            const formData = new FormData(contactForm);
+            
+            // Show success message (in a real application, this would send data to a server)
+            alert('Bedankt voor je bericht! We nemen zo spoedig mogelijk contact met je op.');
+            contactForm.reset();
+        });
+    }
+    
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe service cards and portfolio items
+    document.querySelectorAll('.service-card, .portfolio-item').forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+    });
+    
+    // Glitch effect for title (subtle)
+    const glitchTitle = document.querySelector('.glitch');
+    if (glitchTitle) {
+        setInterval(() => {
+            glitchTitle.style.textShadow = `
+                ${Math.random() * 2 - 1}px ${Math.random() * 2 - 1}px 0 var(--primary-green),
+                ${Math.random() * 2 - 1}px ${Math.random() * 2 - 1}px 0 var(--pure-white)
+            `;
+            
+            setTimeout(() => {
+                glitchTitle.style.textShadow = '2px 2px 0 var(--primary-green)';
+            }, 50);
+        }, 5000);
+    }
+    
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero && scrolled < hero.offsetHeight) {
+            hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+        }
+    });
+    
+    // Add sparkle effect to lights on click
+    lights.forEach(light => {
+        light.addEventListener('click', () => {
+            createSparkle(light);
+        });
+    });
+    
+    function createSparkle(element) {
+        const sparkle = document.createElement('div');
+        sparkle.style.position = 'absolute';
+        sparkle.style.width = '5px';
+        sparkle.style.height = '5px';
+        sparkle.style.background = 'var(--warm-white)';
+        sparkle.style.borderRadius = '50%';
+        sparkle.style.pointerEvents = 'none';
+        sparkle.style.boxShadow = '0 0 10px var(--warm-white)';
+        
+        const rect = element.getBoundingClientRect();
+        sparkle.style.left = rect.left + rect.width / 2 + 'px';
+        sparkle.style.top = rect.top + rect.height / 2 + 'px';
+        
+        document.body.appendChild(sparkle);
+        
+        // Animate sparkle
+        let angle = Math.random() * Math.PI * 2;
+        let distance = 0;
+        const speed = 2;
+        const maxDistance = 50;
+        
+        const animateSparkle = () => {
+            distance += speed;
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            
+            sparkle.style.transform = `translate(${x}px, ${y}px)`;
+            sparkle.style.opacity = 1 - (distance / maxDistance);
+            
+            if (distance < maxDistance) {
+                requestAnimationFrame(animateSparkle);
+            } else {
+                sparkle.remove();
+            }
+        };
+        
+        requestAnimationFrame(animateSparkle);
+    }
+    
+    // Console message
+    console.log('%c🎭 Barhorst Podium Techniek', 'color: #00ff88; font-size: 20px; font-weight: bold;');
+    console.log('%cProfessioneel licht & geluid voor elk podium', 'color: #fff; font-size: 12px;');
+});
