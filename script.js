@@ -186,16 +186,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Create ambient side lights with pattern
 function createAmbientLights() {
+    const heroSection = document.getElementById('home');
+    if (!heroSection) return;
+    
     const container = document.createElement('div');
     container.className = 'ambient-lights';
-    document.body.appendChild(container);
+    heroSection.style.position = 'relative';
+    heroSection.appendChild(container);
     
-    // Exacte posities op basis van screenshot
+    // Exacte posities op basis van screenshot - relatief aan hero sectie
     const positions = [
-        { side: 'left', top: 10 },   // Links boven
-        { side: 'right', top: 5 },   // Rechts boven
-        { side: 'left', top: 50 },   // Links midden
-        { side: 'right', top: 85 }   // Rechts onder
+        { side: 'left', top: 20 },   // Links boven
+        { side: 'right', top: 10 },   // Rechts boven  
+        { side: 'left', top: 70 }    // Links onder
     ];
     
     positions.forEach((pos) => {

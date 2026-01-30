@@ -34,7 +34,7 @@ body {
 
 /* Ambient Side Lights */
 .ambient-lights {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
