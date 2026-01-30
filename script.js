@@ -190,31 +190,31 @@ function createAmbientLights() {
     container.className = 'ambient-lights';
     document.body.appendChild(container);
     
-    const sections = ['home', 'diensten', 'portfolio', 'contact'];
-    const lightsPerSide = 8;
+    // Handpicked positions: afwisselend links/rechts, ongeveer verspreid over pagina
+    const positions = [
+        { side: 'left', top: 15 },
+        { side: 'right', top: 28 },
+        { side: 'left', top: 42 },
+        { side: 'right', top: 58 },
+        { side: 'left', top: 73 },
+        { side: 'right', top: 88 }
+    ];
     
-    sections.forEach((sectionId, sectionIndex) => {
-        for (let i = 0; i < lightsPerSide; i++) {
-            // Left side
-            const leftLight = document.createElement('div');
-            leftLight.className = 'ambient-light';
-            
-            // Right side
-            const rightLight = document.createElement('div');
-            rightLight.className = 'ambient-light';
-            
-            // Calculate positions with pattern
-            const baseTop = (sectionIndex * 25) + (i * 3) + (Math.random() * 2);
-            const offset = Math.sin(i * 0.8) * 2;
-            
-            leftLight.style.left = '2%';
-            leftLight.style.top = `${baseTop + offset}%`;
-            
-            rightLight.style.right = '2%';
-            rightLight.style.top = `${baseTop - offset}%`;
-            
-            container.appendChild(leftLight);
-            container.appendChild(rightLight);
+    positions.forEach((pos, index) => {
+        const light = document.createElement('div');
+        light.className = 'ambient-light';
+        
+        // Add small random offset for natuurlijk effect
+        const randomOffset = (Math.random() - 0.5) * 4;
+        
+        if (pos.side === 'left') {
+            light.style.left = '2%';
+        } else {
+            light.style.right = '2%';
         }
+        
+        light.style.top = `${pos.top + randomOffset}%`;
+        
+        container.appendChild(light);
     });
 }
