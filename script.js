@@ -208,9 +208,9 @@ function createAmbientLights() {
         const randomOffset = (Math.random() - 0.5) * 4;
         
         if (pos.side === 'left') {
-            light.style.left = '2%';
+            light.style.left = '1%';
         } else {
-            light.style.right = '2%';
+            light.style.right = '1%';
         }
         
         light.style.top = `${pos.top + randomOffset}%`;
